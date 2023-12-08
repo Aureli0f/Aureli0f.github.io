@@ -1,6 +1,8 @@
 ---
-heading: "Hi, I'm Codex"
-subheading: "A minimal blog theme for hugo."
+menu:
+    main:
+        name: Accueil
+        weight: -100
+        params:
+            icon: home
 ---
-
-AZERTY
