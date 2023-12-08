@@ -1,0 +1,17 @@
+baseURL : https://aureli0f.github.io/Aureli0f
+languageCode : fr-fr
+title : Aureli0f Write Up
+theme : hugo-theme-stack
+
+
+languages:
+    fr :
+        languageName : Français
+        title: Aureli0f Write Up
+        weight: 1
+        params :
+            description : Write de Aureli0f super cool le keumé
+
+params :
+    mainSections : 
+        - post
