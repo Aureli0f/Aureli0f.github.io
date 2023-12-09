@@ -30,7 +30,7 @@ params:
 
     sidebar:
         emoji: 🔍
-        subtitle: On essaie de comprendre 
+        subtitle: J'essaie de comprendre ce qui m'entoure
         avatar:
             enabled: true
             local: true
@@ -40,9 +40,6 @@ params:
         math: false
         toc: true
         readingTime: true
-        license:
-            enabled: true
-            default: Licensed under CC BY-NC-SA 4.0
     
     widgets:
         homepage:
@@ -68,6 +65,12 @@ menu:
           url: https://ozint.eu/ozinter/4298/
           params:
               icon: ozint
+        
+        - identifier: linkedin
+          name: Linkedin
+          url : https://www.linkedin.com/in/corentin-huvelin/
+          params:
+              icon: linkedin
 
         # - identifier: twitter
         #   name: Twitter

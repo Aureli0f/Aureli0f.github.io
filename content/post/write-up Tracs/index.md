@@ -1,7 +1,7 @@
 +++
 author = "Corentin Huvelin"
-title = "TRACS 2023 : Jeo-Lier "
-date = "2023-12-08"
+title = "TRACS 2023 : Jeo-Lier"
+date = "2023-12-09"
 description = "Write Up du challenge Jeo-lier du TRACS édition 2023"
 tags = [
     "OSINT",
@@ -13,154 +13,176 @@ categories = [
     "Write-Up",
 ]
 image = "tracs.jpg"
-draft = true
 +++
 
-This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.
+<style>
+    article img {
+        display: block;
+        margin-left :auto;
+        margin-right: auto;
+    }
+</style>
+
+
+J'ai eu la chance de participer avec mon équipe au TRACS édition 2023 qui se déroulais à CentraleSupélec le samedi 2 décembre. 
+Sous le club GCC de l'ENSIBS, notre équipe [GCC] Abracadabrhack à terminé 15ème sur 87 équipes.
+
+Je vais ici présenter mon Write-Up du challenge Joe-lier dont j'ai eu la charge durant le CTF.
+
+Merci à mes coéquipiers Nathan Dunand, Matthieu Breuil, Paul Guennec et  Victor Blanchard et merci à CentraleSupélec, ViaRézo et la DGSE pour l'événement.
 <!--more-->
 
-## Headings
+# Le challenge Joe-lier
 
-The following HTML `<h1>`—`<h6>` elements represent six levels of section headings. `<h1>` is the highest section level while `<h6>` is the lowest.
+Ce challenge avait pour but de rassembler des informations sur une personne fictive. Ces informations devrait pouvoir nous aider à exfiltrer un collègue retenu dans le pays malvaillant EvilCountry.
 
-# H1
-## H2
-### H3
-#### H4
-##### H5
-###### H6
+La seul information à notre disposition en premier lieu est un pseudonyme : `shadowatch87`
 
-## Paragraph
+## Découverte du dashboard
 
-Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.
+La première partie du challenge nous indiquais que cette personne semble utiliser un service de gestion de projet en ligne.
+Notre objectif est simple, retrouver précisement la page qui est utilisé.
 
-Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.
+Nous n'avons qu'un pseudo, mon premier reflexe est donc d'utiliser [WhatsMyName](https://whatsmyname.app/) mais sans trop de résultat.
 
-## Blockquotes
+J'utilise donc Maigret afin d'avoir un listing des comptes existants avec un outil différent : 
 
-The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a `footer` or `cite` element, and optionally with in-line changes such as annotations and abbreviations.
-
-#### Blockquote without attribution
-
-> Tiam, ad mint andaepu dandae nostion secatur sequo quae.
-> **Note** that you can use *Markdown syntax* within a blockquote.
-
-#### Blockquote with attribution
-
-> Don't communicate by sharing memory, share memory by communicating.<br>
-> — <cite>Rob Pike[^1]</cite>
-
-[^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
-
-## Tables
-
-Tables aren't part of the core Markdown spec, but Hugo supports supports them out-of-the-box.
-
-   Name | Age
---------|------
-    Bob | 27
-  Alice | 23
-
-#### Inline Markdown within tables
-
-| Italics   | Bold     | Code   |
-| --------  | -------- | ------ |
-| *italics* | **bold** | `code` |
-
-| A                                                        | B                                                                                                             | C                                                                                                                                    | D                                                 | E                                                          | F                                                                    |
-|----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------|----------------------------------------------------------------------|
-| Lorem ipsum dolor sit amet, consectetur adipiscing elit. | Phasellus ultricies, sapien non euismod aliquam, dui ligula tincidunt odio, at accumsan nulla sapien eget ex. | Proin eleifend dictum ipsum, non euismod ipsum pulvinar et. Vivamus sollicitudin, quam in pulvinar aliquam, metus elit pretium purus | Proin sit amet velit nec enim imperdiet vehicula. | Ut bibendum vestibulum quam, eu egestas turpis gravida nec | Sed scelerisque nec turpis vel viverra. Vivamus vitae pretium sapien |
-
-## Code Blocks
-
-#### Code block with backticks
-
-```html
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Example HTML5 Document</title>
-</head>
-<body>
-  <p>Test</p>
-</body>
-</html>
+```bash
+┌──(kali㉿kali)-[~/maigret]
+└─$ ./maigret.py shadowatch87
+[-] Starting a search on top 500 sites from the Maigret database...
+[!] You can run search by full list of sites with flag `-a`
+[*] Checking username shadowatch87 on:
+[+] Pinterest: https://www.pinterest.com/shadowatch87/
+[+] metacritic: https://www.metacritic.com/user/shadowatch87
+[+] 9GAG: https://www.9gag.com/u/shadowatch87
+[+] CreativeMarket: https://creativemarket.com/users/shadowatch87
+[+] Lolchess: https://lolchess.gg/profile/na/shadowatch87
+[+] Contently: https://shadowatch87.contently.com/
+[+] club.cnews.ru: https://club.cnews.ru/shadowatch87
+100%|█████████████████████████████████████████| 500/500 [00:17<00:00, 28.15it/s]
+[-] Restarting checks for 2 sites... (1 attempts left)
+100%|█████████████████████████████████████████| 2/2 [00:15<00:00,  7.53s/it]
+[*] Short text report:
+Search by username shadowatch87 returned 7 accounts.
+Extended info extracted from 0 accounts.
+Countries: us, kr, in, ru
+Interests (tags): art, sharing, photo, stock, freelance, blog
 ```
 
-#### Code block indented with four spaces
+En vérifiant les différent résultats obtenus, le seul compte probant est celui de [9gag](https://www.9gag.com/u/shadowatch87).
+![Profil 9gag obtenu](img/TRACS_9gag.png)
 
-    <!doctype html>
-    <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <title>Example HTML5 Document</title>
-    </head>
-    <body>
-      <p>Test</p>
-    </body>
-    </html>
+On pivote donc avec ce nouveau pseudo et toujours avec Maigret (il a fait ses preuves 😎) : 
 
-#### Code block with Hugo's internal highlight shortcode
-{{< highlight html >}}
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Example HTML5 Document</title>
-</head>
-<body>
-  <p>Test</p>
-</body>
-</html>
-{{< /highlight >}}
-
-#### Diff code block
-
-```diff
-[dependencies.bevy]
-git = "https://github.com/bevyengine/bevy"
-rev = "11f52b8c72fc3a568e8bb4a4cd1f3eb025ac2e13"
-- features = ["dynamic"]
-+ features = ["jpeg", "dynamic"]
+```bash
+┌──(kali㉿kali)-[~/maigret]
+└─$ ./maigret.py Xx_CRYPTOKILLER87_xX
+[-] Starting a search on top 500 sites from the Maigret database...
+[!] You can run search by full list of sites with flag `-a`
+[*] Checking username Xx_CRYPTOKILLER87_xX on:
+[+] Pinterest: https://www.pinterest.com/Xx_CRYPTOKILLER87_xX/
+[+] Reddit: https://www.reddit.com/user/Xx_CRYPTOKILLER87_xX
+[+] CreativeMarket: https://creativemarket.com/users/Xx_CRYPTOKILLER87_xX
+[+] Lolchess: https://lolchess.gg/profile/na/Xx_CRYPTOKILLER87_xX
+[+] Contently: https://Xx_CRYPTOKILLER87_xX.contently.com/
+[+] club.cnews.ru: https://club.cnews.ru/Xx_CRYPTOKILLER87_xX
+100%|█████████████████████████████████████████| 500/500 [00:16<00:00, 29.53it/s]
+[-] Restarting checks for 2 sites... (1 attempts left)
+100%|█████████████████████████████████████████| 2/2 [00:15<00:00,  7.54s/it]
+[*] Short text report:
+Search by username Xx_CRYPTOKILLER87_xX returned 6 accounts.
+Extended info extracted from 0 accounts.
+Countries: kr, in, ru
+Interests (tags): art, photo, sharing, discussion, news, stock, freelance, blog
 ```
 
-## List Types
+Quelques résultats mais encore une fois un seul nous interesse, le profil [Reddit](https://www.reddit.com/user/Xx_CRYPTOKILLER87_xX/).
+![Profil Reddit obtenu](img/TRACS_reddit.png)
 
-#### Ordered List
+Une nouvelle information est disponible, une adresse mail : `joelier198703@gmail.com`
 
-1. First item
-2. Second item
-3. Third item
+Cette fois je me retourne vers mon ami [EPIOS](https://epieos.com/) qui m'indique qu'un compte google existe bien ainsi qu'un compte Trello, une application de gestion de projet en ligne. Nous approchons du but.
 
-#### Unordered List
+Afin de retrouver le Trello publique associé je dois me tourner vers un autre outils, je ne peut malheureusement pas me payer l'abonnement EPIOS, pauvre étudiant que je suis 🥲.
+Je vais donc utilisé [BLACKBIRD](https://blackbird-osint.herokuapp.com/) et l'adresse mail obtenu. Entre quelque résultat initéressant, on retrouve bien un lien vers un Trello publique : [Lien vers l'API Trello](https://trello.com/1/Members/joelier198703@gmail.com?fields=activityBlocked%2CavatarUrl%2Cbio%2CbioData%2Cconfirmed%2CfullName%2CidEnterprise%2CidMemberReferrer%2Cinitials%2CmemberType%2CnonPublic%2Cproducts%2Curl%2Cusername)
 
-* List item
-* Another item
-* And another item
+On retrouve ensuite le [profil de Joe Lier](https://trello.com/joelier) puis dans cette nouvelle page on peut observer les activités récentes du compte. On retrouve alors le [Tableau de Xx_CRYPTOKILLER87_xX](https://trello.com/b/xB6a3O2f/tableau-de-xxcryptokiller87xx).
 
-#### Nested list
+![Dashboard de Joe Lier](img/TRACS_Trello_dashboard.png)
 
-* Fruit
-  * Apple
-  * Orange
-  * Banana
-* Dairy
-  * Milk
-  * Cheese
+Le flag pour la première partie est donc : `https://trello.com/b/xB6a3O2f/tableau-de-xxcryptokiller87xx`
 
-## Other Elements — abbr, sub, sup, kbd, mark
+## Retrouver le badge
 
-<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
+La seconde partie du challenge nous demande de retrouver un badge qui aurait été perdu par Joe Lier.
+En commançant par fouiller le dashboard Trello, on peut retrouver [une carte avec le texte suivant](https://trello.com/c/6LpQCP2J/3-copier-le-badge-pro) le texte et l'image suivante :  
 
-H<sub>2</sub>O
+> On a roulé environ 120km en partant de là, et y'a un site touristique auquel on s'est arrêtés pour déjeuner. L'après-midi on est allé à quelques kilomètres de là faire de la randonnée, y'a une montagne qui culmine à 1665 mètres, on a réussi à aller au sommet mais j'ai perdu ma sacoche en redescendant, j'avais de l'argent et quelques affaires dedans, notamment mon badge du boulot... Bon du coup il faut que je copie mon badge pour pas me faire toper par les officiers de sécu…
 
-X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
+![Image d'un camion stoppé sur un parking à côté d'un cours d'eau, des montagnes son visible en arrière plan](img/TRACS_montagne.png)
 
-Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
+Evidemment pas de donnée [EXIF](https://fr.wikipedia.org/wiki/Exchangeable_image_file_format) sur l'image. Je m'interesse donc au texte sur le camion. Avec un passage dans google image, je recupère et traduit directement ce qui me donne à partir du Norvégien :
 
-Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+`K KRAEMER MARITIME Votre partenaire`
 
-## Hyperlinked image
+Après une courte recherche, K Kraemer est bien une entreprise Norvegienne spécialisé dans la livraison de nourriture ou de produits ménagers.
 
-[![Google](https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png)](https://google.com)
+Après avoir passé une bonne heure à essayé de retrouvé le lieu précis sur l'image, j'ai changé mon fusil d'épaule pour juste rechercher une montagne de 1 665 m d'altitude situé en Norvège. 
+
+Grâce au site [Peakery](https://peakery.com/), je peut rechercher les montagnes avec une altitude comprise entre 5 000 et 5 500 pieds (1 665 mètre correspond à 5 462 pieds).
+
+Je trouve assez vite un seul résultat probant, le sommet [Alnestinden](https://peakery.com/alnestinden-norway/).
+Notre équipe a décidé de testé ce flag car nous n'avions pas un temps infini lors de l'épreuve et nous devions passé à d'autre challenge.
+
+Heureusement, le flag était bien `Alnestinden`.
+
+## Portrait robot
+
+Pour le troisième flag, nous devons retrouver la couleur des yeux de Joe Lier afin de réaliser un portrait robot.
+La couleur que nous devons retrouver doit être la manière dont il se décrit lui-même.
+
+Actuellement sur le dashboard, nous n'avons pas d'information se rapportant au physique de notre cible. Cependant, on peux chercher au niveau des tâches archivés sur le Trello et on tombe sur [la carte suivante](https://trello.com/c/pEUrNneI/10-acheter-les-nouvelles-lunettes) : 
+
+>Bon là y’a pas les branches parce que c’est un vieux montage, mais let’s go elles sont trop stylées!
+
+![Une image de Joe Lier avec une photomontage de lunette](img/TRACS_lunettes.png)
+
+On a donc une image de Joe Lier, mais cette piste ne donnera rien. Pas d'information spécifique sur l'image, ni de retour avec des recherche inversé sur Yandex, Google ou Bing.
+
+Je décide donc me pencher sur [une autre carte](https://trello.com/c/JsDgCb4q/11-changer-de-plateforme) :  
+
+> Twitter c’est devenu un enfer, let’s go sur le serveur hosnet !
+N.B : penser à changer la photo
+N.B2: La crypt0 c’est la vie !
+
+Je décide donc de ma lancer à la recherche du serveur Hosnet mentionné dans la carte. Le texte précedant me fait pensé au vague de départ de twitter au début de l'année ou les utilisateurs partait vers Mastodon. Avec un recherche google simple, je retrouve l'instance suivante : [mastodon.hosnet.fr](https://mastodon.hosnet.fr/explore)
+
+Sur le Flux direct, on peut observer un compte ayant la photo de profil que nous recherchions avec le compte [crypt0_ki113r87](https://mastodon.hosnet.fr/@crypt0_ki113r87) et nous retrouvons l'information qu'on recherche : 
+![Le profil de Joe Lier sur le serveur Mastodon](img/TRACS_sans_lunettes.png)
+
+Le flag est donc `châtaignes`
+
+## Des transactions douteuses
+
+Voici l'énoncé tel qu'il nous était fournit : 
+
+> Il semblerait que Joe Lier organise des transactions. Pouvez-vous trouver la trace d’une transaction qui a été finalisée ? Si oui, indiquez le message exacte qui y est associé.
+
+Au vu du dashboard, je me suis douté que les transactions finalisées était les cartes présent dans la catégorie terminé avec les indicateurs comme BA - C312 - P452317.
+
+![Les cartes terminés du dashboard](img/TRACS_Trello_termine.png) 
+
+N'ayant pas pu terminer cette dernière partie durant l'épreuves, je remercie les copains de [isFred](https://isfred.fr/) pour l'aide après la compétition afin de trouver la solution.
+
+Le détail qu'il me manquais lors de la compétiton était l'utilisation de [Wayback Machine](https://archive.org/web/) sur le Trello de Joe Lier. En effet, en passant les url des cartes sur wayback machine, on peut voir qu'[une carte a un détail supplémentaire](https://web.archive.org/web/20231103144708/https://trello.com/c/dCkN4nXj/12-ba-c312-p452317) :
+
+![La carte BA - C312 - P452317 possède une information supplémentaire : 0x6286df9af2fb04e6b8b6e4b4774bbb2824ffa5adb6b94723ff44c5d81999ffdb](img/TRACS_carte_transaction.png)
+
+Au vu du format, cette suite de caractère ma fait pensé à un hache de transaction crypto. Le fait que chaque compte de Joe Lier visité precedemment parlait de crypto renforce cette hypohtèse.
+
+Sur le site [Blockchair](https://blockchair.com/fr), on peut retrouver la transaction qui est sur la blockchain BNB. On peut donc aller sur un site spécialisé sur cette blockchain [BscScan](https://bscscan.com/) et voir qu'il y a des champs supplémentaires qui contiennent une chaine Hexadecimal. On peut directement changé la visualisation pour l'afficher en UTF-8 sur le site ou chercher un convertisseur Hexa vers UTF-8. Ce qui nous donne la chaîne suivante : `Bloc A - Cellule 312 - Prisonnier 452317 => 1 tel // 2 clopes`
+
+Le dernier flag était donc `Bloc A - Cellule 312 - Prisonnier 452317 => 1 tel // 2 clopes`
+
+Merci pour votre patience et n'hésitez pas à me contacter sur Linkedin si vous avez des questions.
