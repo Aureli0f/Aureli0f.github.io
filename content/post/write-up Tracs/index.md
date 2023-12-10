@@ -24,8 +24,8 @@ image = "tracs.jpg"
 </style>
 
 
-J'ai eu la chance de participer avec mon équipe au TRACS édition 2023 qui se déroulais à CentraleSupélec le samedi 2 décembre. 
-Sous le club GCC de l'ENSIBS, notre équipe [GCC] Abracadabrhack à terminé 15ème sur 87 équipes.
+J'ai eu la chance de participer avec mon équipe au TRACS édition 2023 qui se déroulait à CentraleSupélec le samedi 2 décembre. 
+Sous le club GCC de l'ENSIBS, notre équipe [GCC] Abracadabrhack a terminé 15ème sur 87 équipes.
 
 Je vais ici présenter mon Write-Up du challenge Joe-lier dont j'ai eu la charge durant le CTF.
 
@@ -34,7 +34,7 @@ Merci à mes coéquipiers Nathan Dunand, Matthieu Breuil, Paul Guennec et  Victo
 
 # Le challenge Joe-lier
 
-Ce challenge avait pour but de rassembler des informations sur une personne fictive. Ces informations devraient pouvoir nous aider à exfiltrer un collègue retenu dans le pays malveillant EvilCountry.
+Ce challenge avait pour but de rassembler des informations sur une personne fictive. Ces informations devaient pouvoir nous aider à exfiltrer un collègue retenu dans le pays malveillant EvilCountry.
 
 La seule information à notre disposition en premier lieu est un pseudonyme : `shadowatch87`
 
@@ -43,7 +43,7 @@ La seule information à notre disposition en premier lieu est un pseudonyme : `s
 La première partie du challenge nous indiquait que cette personne semble utiliser un service de gestion de projet en ligne.
 Notre objectif est simple, retrouver précisément la page qui est utilisée.
 
-Nous n'avons qu'un pseudo, mon premier réflexe est donc d'utiliser [WhatsMyName](https://whatsmyname.app/) mais sans trop de résultats.
+Nous n'avons qu'un pseudo, mon premier réflexe est donc d'utiliser [WhatsMyName](https://whatsmyname.app/) mais sans trop de résultat.
 
 J'utilise donc Maigret afin d'avoir un listing des comptes existants avec un outil différent : 
 
@@ -126,7 +126,7 @@ En commençant par fouiller le dashboard Trello, on peut retrouver [une carte av
 
 `K KRAEMER MARITIME Votre partenaire`
 
-Après une courte recherche, K Kraemer est bien une entreprise norvégienne spécialisée dans la livraison de nourriture ou de produits ménagers.
+Après une courte recherche, K Kraemer est bien une entreprise norvégienne spécialisée dans la livraison de nourritures ou de produits ménagers.
 
 Après avoir passé une bonne heure en essayant de retrouver le lieu précis sur l'image, j'ai changé mon fusil d'épaule pour juste rechercher une montagne de 1 665 m d'altitude située en Norvège. 
 
@@ -156,9 +156,9 @@ Je décide donc me pencher sur [une autre carte](https://trello.com/c/JsDgCb4q/1
 N.B : penser à changer la photo
 N.B2: La crypt0 c’est la vie !
 
-Je décide donc de me lancer à la recherche du serveur Hosnet mentionné dans la carte. Le texte précédant me fait penser aux vagues de départ de Twitter au début de l'année où les utilisateurs partaient vers Mastodon. Avec un recherche google simple, je retrouve l'instance suivante : [mastodon.hosnet.fr](https://mastodon.hosnet.fr/explore)
+Je décide donc de me lancer à la recherche du serveur Hosnet mentionné dans la carte. Le texte précédant me fait penser aux vagues de départ de Twitter au début de l'année où les utilisateurs partaient vers Mastodon. Avec une recherche google simple, je retrouve l'instance suivante : [mastodon.hosnet.fr](https://mastodon.hosnet.fr/explore)
 
-Sur le flux en direct, on peut observer un compte ayant la photo de profil que nous recherchions avec le compte [crypt0_ki113r87](https://mastodon.hosnet.fr/@crypt0_ki113r87) et nous retrouvons l'information qu'on recherche : 
+Sur le flux en direct, nous pouvons observer un compte ayant la photo de profil que nous recherchions avec le compte [crypt0_ki113r87](https://mastodon.hosnet.fr/@crypt0_ki113r87) et nous retrouvons l'information que nous cherchons : 
 ![Le profil de Joe Lier sur le serveur Mastodon](img/TRACS_sans_lunettes.png)
 
 Le flag est donc `châtaignes`
