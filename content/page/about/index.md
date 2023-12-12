@@ -10,9 +10,9 @@ menu:
             icon: user
 ---
 
-Petit blog d'un Osinter, j'aborderais des sujets autour des mes passions du moments et des write up de différent challenge de CTF ou de plateforme d'entrainement.
+Petit blog d'un Osinter, j'aborderais des sujets autour de mes passions du moment et des write up de différents challenges de CTF ou de plateforme d'entraînement.
 
-Vous pouvez me faire des retour sur LinkedIn si vous le souhaitez 😊.
+Vous pouvez me faire des retours sur LinkedIn si vous le souhaitez 😊.
 
 [Mon profil Ozint.eu](https://ozint.eu/ozinter/4298/)</br>
 [Mon compte LinkedIn](https://www.linkedin.com/in/corentin-huvelin/)
